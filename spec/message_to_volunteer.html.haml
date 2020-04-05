@@ -1,0 +1,39 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %table{ style: "background-color: #ffffff; border-collapse: collapse; border-bottom: 20px; max-width:600px; font-weight: 300; color: #657B8C;"}
+      %tr{ style: "font-family: helvetica; max-width: 600px;" }
+        %td
+          %table{ style: "width: 100%; table-layout: fixed; margin-top: 20px; border-collapse: separate; border-spacing:0 15px;"}
+            %tr{ style: "font-family: helvetica; max-width: 600px;" }
+              %td{ style: "width: 65px; text-align: center;"}
+                - img_src = @location.photo.present? ? @location.photo.url(:thumb) : "http://www.worldpackers.com/photos/thumb/missing.png"
+                = link_to user_url(@location, locale: I18n.locale) do
+                  = image_tag img_src, style: "width: 100%; max-width: 100px; border-radius: 50%; -webkit-border-radius: 50%; -moz-border-radius: 50%;", alt: " "
+            %tr
+              %td{ style: "width: 65px; text-align: center;"}
+                %h2{style: "font-family: helvetica; color: #657B8C !important; font-weight: bold; text-align: center; font-size: 34px; margin: 0 0 5px 0;" }= @location.name
+                %h3{style: "font-family: helvetica; margin: 0; color: #657B8C; font-size: 16px; font-weight: normal; text-align: center;"}= formatted_city_and_country(@location.city, @location.country_in_slug)
+            %tr{ style: "font-family: helvetica; max-width: 600px;" }
+              %td
+                %p{style: "font-family: helvetica;margin: 5px; font-size: 18px;" }= t("mailers.message_to_volunteer.greeting", first_name: @receiver.first_name)
+            %tr{ style: "font-family: helvetica; max-width: 600px;" }
+              %td{ style: "margin: 20px 0;"}
+                %p{style: "font-family: helvetica;margin: 5px; font-size: 18px;"}
+                  = t("mailers.message_to_volunteer.new_message")
+                  = link_to "Worldpackers!", "http://www.worldpackers.com/#{I18n.locale}", style: "color: #158CBA; text-decoration: none; font-weight: bold;"
+            %tr{ style: "width: 100%;background-color: #f6f7f8;"}
+              %td{ style: "margin: 20px 0;"}
+                %ul{ style: "list-style: none; margin: 20px; padding-left: 0px; display: inline-block;"}
+                  %li{ style: "display: inline-block; min-height: 75px; margin: 0px;"}
+                    = link_to @location.name, user_url(@location, locale: I18n.locale), style: "font-weight: bold; font-size: 20px; color: #657B8C; text-decoration: none;"
+                    %p{ style: "color: #657B8C; margin: 0px;font-size: 14px; margin-bottom: 20px;"}
+                      = formatted_city_and_country(@location.city, @location.country_in_slug)
+                    %p{ style: "color: #657B8C; margin: 0px; font-size: 18px;"}
+                      = "#{@message.content.gsub(/\n/, '<br>')}".html_safe
+            %tr{ style: "font-family: helvetica; max-width: 600px;" }
+              %td
+                %p{ style: "margin: 5px; font-size: 18px;"}
+                  = link_to t("mailers.message_to_volunteer.reply_message"), match_url(@match, locale: I18n.locale), style: "margin: 20px 0; border-radius: 50px; width: 100%; padding: 17px 0px; background: #6fc375; font-weight: bold; color: white; display: inline-block; text-decoration: none; text-align: center;"

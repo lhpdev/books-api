@@ -12,10 +12,10 @@ Things you may want to cover:
 * Configuration
 
 * Database creation
-  - To seed the database run the command: 'docker-compose run --rm web rails db:create'
+  - To create the database run the command: 'docker-compose run --rm web rails db:create'
 
 * Database initialization
-  - To seed the database run the command: 'docker-compose run --rm web rails db:migrate'
+  - To migrate the database run the command: 'docker-compose run --rm web rails db:migrate'
   - To seed the database run the command: 'docker-compose run --rm web rails db:seed'
 
 * How to run the test suite

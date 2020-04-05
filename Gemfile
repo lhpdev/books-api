@@ -8,7 +8,10 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 
 group :development, :test do
+  gem 'rspec-rails', '~> 4.0'
+  gem 'factory_bot_rails'
   gem 'byebug', '~> 11.1', '>= 11.1.1'
+  gem 'rails-controller-testing', '~> 1.0', '>= 1.0.4'
 end
 
 group :development do
@@ -16,6 +19,7 @@ group :development do
 end
 
 group :test do
-  gem 'rspec-rails', '~> 4.0'
-  gem 'factory_girl_rails', '~> 4.9'
+  gem 'database_cleaner'
 end
+
+gem 'interactor', '~> 3.1', '>= 3.1.1'

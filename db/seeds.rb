@@ -1,5 +1,5 @@
 authors = Author.create([{ name:  'J. R. R. Tolkien' }, { name: 'Eckhart Tolle' }, { name: 'Robert C. Martin' }, { name: 'J. K. Rowling' }])
-collections = Collection.create([{ title: 'The Lord of Rings' }, { title: 'Harry Potter' }])
+collections = Books::Collection.create([{ title: 'The Lord of Rings' }, { title: 'Harry Potter' }])
 
 Book.create(author: authors.first, title: 'The Hobbit', isbn: '9780582186552', description: 'The Hobbit is a tale of high adventure, undertaken by a company of dwarves in search of dragon-guarded gold. A reluctant partner in this perilous quest is Bilbo Baggins, a comfort-loving unambitious hobbit, who surprises even himself by his resourcefulness and skill as a burglar.', price: 25.00)
 Book.create(author: authors.first, collection: collections.first, title: 'The Fellowship of the Ring', isbn: '9788071457060', description: 'The first part of the Lord of the Rings trilogy, Tolkien’s classic epic of Good versus Evil, set in the fictional world of Middle Earth, this book introduces the main characters and sets Frodo the Hobbit and his companions on their quest to return the ring of the evil Sauron to the fires of Mordor.', price: 25.00)
