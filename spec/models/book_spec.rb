@@ -24,10 +24,6 @@ RSpec.describe Book, type: :model do
       it 'must have an isbn' do
         expect(subject.errors[:isbn].size).to eq(1)
       end
-
-      it 'must have an author' do
-        expect(subject.errors[:author].size).to eq(1)
-      end
     end
 
     context 'with repeated isbn' do
@@ -39,6 +35,20 @@ RSpec.describe Book, type: :model do
 
       it 'must have a title' do
         expect(subject.errors[:isbn].size).to eq(1)
+      end
+    end
+
+    context 'with description too long' do
+      subject do
+        build(:book, description: "Sauron, the Dark Lord, has gathered to him all the Rings of Power, the means by which he intends to rule Middle-earth.
+                                                All he lacks in his plans for dominion is the One Ring, the ring that rules them all, which has fallen into the hands of
+                                                the hobbit, Bilbo Baggins. In a sleepy village in the Shire, young Frodo Baggins finds himself faced with an immense task,
+                                                as his elderly cousin Bilbo entrusts the Ring to his care. Frodo must leave his home and make a perilous journey across
+                                                Middle-earth to the Cracks of Doom.")
+      end
+
+      it 'must have a shorter description' do
+        expect(subject.errors[:description].size).to eq(1)
       end
     end
   end
