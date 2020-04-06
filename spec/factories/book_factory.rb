@@ -5,5 +5,6 @@ FactoryBot.define do
     sequence(:description) { |n| "Description #{n}" }
     sequence(:isbn) { |n| "#{n}" }
     sequence(:year) { |n| "200#{n}" }
+    price { '25.00' }
   end
 end
