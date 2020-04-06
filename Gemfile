@@ -14,6 +14,7 @@ gem 'interactor-rails', '~> 2.2', '>= 2.2.1'
 
 # Server
 gem 'puma', '~> 3.11'
+gem 'rack-attack'
 
 # API
 gem 'active_model_serializers', '~> 0.9.4'
