@@ -21,7 +21,7 @@ module Api
       def author
         return {} if set_author.nil?
         {
-          id: set_author.id,
+          author_id: set_author.id,
           name: set_author.name
         }
       end

@@ -30,11 +30,11 @@ module Api
                 year: /.*/,
                 price: /.*/,
                 author: {
-                  id: /.*/,
+                  author_id: /.*/,
                   name: /.*/
                 },
                 collection: {
-                  id: /.*/,
+                  collection_id: /.*/,
                   title: /.*/
                 },
               },
@@ -46,11 +46,11 @@ module Api
                 year: /.*/,
                 price: /.*/,
                 author: {
-                  id: /.*/,
+                  author_id: /.*/,
                   name: /.*/
                 },
                 collection: {
-                  id: /.*/,
+                  collection_id: /.*/,
                   title: /.*/
                 },
               },

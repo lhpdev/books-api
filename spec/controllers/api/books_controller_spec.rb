@@ -4,6 +4,96 @@ require 'spec_helper'
 
 module Api
   describe BooksController, type: :controller do
+    describe "#index" do
+      context 'with searched book available' do
+        let(:collection) { create(:collection) }
+        let!(:book) { create(:book, title: 'The Magic', year: '2011', collection: collection) }
+        let!(:similar_book) { create(:book, title: 'The Magic', year: '2020', collection: collection) }
+
+        it 'searches book by title' do
+          get :index, params: { q: book.title }
+          expect(response).to be_ok
+          expect(response.body).to include_json(
+            books: [
+              {
+                id: /.*/,
+                title: /.*/,
+                description: /.*/,
+                isbn: /.*/,
+                year: /.*/,
+                price: /.*/,
+                author: {
+                  author_id: /.*/,
+                  name: /.*/
+                },
+                collection: {
+                  collection_id: /.*/,
+                  title: /.*/
+                },
+              },
+              {
+                id: /.*/,
+                title: /.*/,
+                description: /.*/,
+                isbn: /.*/,
+                year: /.*/,
+                price: /.*/,
+                author: {
+                  author_id: /.*/,
+                  name: /.*/
+                },
+                collection: {
+                  collection_id: /.*/,
+                  title: /.*/
+                },
+              },
+            ]
+          )
+        end
+
+        it 'searches book by isbn' do
+          get :index, params: { q: book.isbn }
+          expect(response).to be_ok
+          expect(response.body).to include_json(
+            books: [
+              {
+                id: book.id,
+                title: book.title,
+                description: book.description,
+                year: book.year,
+                isbn: book.isbn,
+                price: book.price,
+                author: {
+                  author_id: book.author.id,
+                  name: book.author.name
+                },
+                collection: {
+                  collection_id: book.collection.id,
+                  title: book.collection.title
+                }
+              }
+            ]
+          )
+        end
+      end
+
+      context 'with not found book' do
+        let(:collection) { create(:collection) }
+        let!(:book) { build(:book, title: 'The Magic', year: '2011', collection: collection) }
+
+        it 'searches book by title' do
+          get :index, params: { q: book.title }
+          expect(response).to_not be_ok
+          expect(response.body).to include_json({})
+        end
+
+        it 'searches book by isbn' do
+          get :index, params: { q: book.isbn }
+          expect(response).to_not be_ok
+          expect(response.body).to include_json({})
+        end
+      end
+    end
 
     describe "#show" do
       context 'with author and collection' do
@@ -21,11 +111,11 @@ module Api
             isbn: book.isbn,
             price: book.price,
             author: {
-              id: book.author.id,
+              author_id: book.author.id,
               name: book.author.name
             },
             collection: {
-              id: book.collection.id,
+              collection_id: book.collection.id,
               title: book.collection.title
             }
           )
@@ -46,7 +136,7 @@ module Api
             isbn: book.isbn,
             price: book.price,
             author: {
-              id: book.author.id,
+              author_id: book.author.id,
               name: book.author.name
             },
             collection: {}

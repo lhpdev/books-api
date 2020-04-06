@@ -17,7 +17,7 @@ module Api
       def collection
         return {} if collection_id.nil?
         {
-          id: set_collection.id,
+          collection_id: set_collection.id,
           title: set_collection.title
         }
       end
@@ -25,7 +25,7 @@ module Api
       def author
         return {} if author_id.nil?
         {
-          id: set_author.id,
+          author_id: set_author.id,
           name: set_author.name
         }
       end

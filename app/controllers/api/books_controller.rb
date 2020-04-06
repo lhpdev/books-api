@@ -1,6 +1,24 @@
 module Api
   class BooksController < ApplicationController
-    before_action :set_book, only: [:show]
+    before_action :set_book, only: [:show, :destroy]
+
+    def index
+      result = Books::Search.call(q: params[:q])
+
+      if result.success? && result.items.any?
+        respond_to do |format|
+          format.any do
+            render json: result.items, serializer: V1::SearchResultSerializer, root: false, status: :ok
+          end
+        end
+      else
+        respond_to do |format|
+          format.any do
+            render json: {}, root: false, status: 404
+          end
+        end
+      end
+    end
 
     def show
       respond_to do |format|
@@ -21,9 +39,7 @@ module Api
     end
 
     def destroy
-      book = Book.find(params[:id])
-
-      if book.destroy
+      if @book.destroy
         render json: {}, root: false, status: :ok
       else
         render json: { errors: book.errors }, root: false, status: :bad_request
