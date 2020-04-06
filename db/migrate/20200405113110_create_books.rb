@@ -3,13 +3,11 @@ class CreateBooks < ActiveRecord::Migration[5.2]
     create_table :books do |t|
       t.string :title
       t.string :isbn
-      t.decimal :price
+      t.string :price
       t.string :description
       t.string :year
-      t.integer "author_id"
-      t.integer "collection_id"
-      t.index ["author_id"], name: "index_books_on_author_id"
-      t.index ["collection_id"], name: "index_books_on_collection_id"
+      t.belongs_to :author
+      t.belongs_to :collection
     end
   end
 end

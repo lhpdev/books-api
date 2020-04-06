@@ -22,11 +22,11 @@ ActiveRecord::Schema.define(version: 2020_04_05_114842) do
   create_table "books", force: :cascade do |t|
     t.string "title"
     t.string "isbn"
-    t.decimal "price"
+    t.string "price"
     t.string "description"
     t.string "year"
-    t.integer "author_id"
-    t.integer "collection_id"
+    t.bigint "author_id"
+    t.bigint "collection_id"
     t.index ["author_id"], name: "index_books_on_author_id"
     t.index ["collection_id"], name: "index_books_on_collection_id"
   end

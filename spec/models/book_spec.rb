@@ -47,7 +47,7 @@ RSpec.describe Book, type: :model do
     it 'can have a collection' do
       collection = create(:collection)
       book = create(:book, collection_id: collection.id)
-      expect(Books::Collection.find(book.collection_id))
+      expect(Collection.find(book.collection_id))
     end
   end
 end

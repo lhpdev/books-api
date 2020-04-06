@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe Books::Collection, type: :model do
+RSpec.describe Collection, type: :model do
   describe 'validations' do
     subject { build(:collection) }
 
