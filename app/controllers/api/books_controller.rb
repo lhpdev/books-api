@@ -58,7 +58,9 @@ module Api
         isbn: permitted_params[:isbn],
         description: permitted_params[:description],
         price: permitted_params[:price],
-        year: permitted_params[:year]
+        year: permitted_params[:year],
+        author_id: permitted_params[:author_id],
+        collection_id: permitted_params[:collection_id]
       }
     end
 

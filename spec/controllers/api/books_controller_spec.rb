@@ -164,10 +164,25 @@ module Api
           }
         end
 
-        it 'should save the preferences' do
+        it 'should create book and return the serialized json correctly' do
           post :create, params: params
           expect(response.status).to eq(200)
-          expect(response.body).to include_json(params[:book])
+          expect(response.body).to include_json(
+            id:  /.*/,
+            title: params[:book][:title],
+            description: params[:book][:description],
+            year: params[:book][:year],
+            isbn: params[:book][:isbn],
+            price: params[:book][:price],
+            author: {
+              author_id: params[:book][:author_id],
+              name: /.*/
+            },
+            collection: {
+              collection_id: params[:book][:collection_id],
+              title: /.*/
+            }
+          )
         end
       end
     end
