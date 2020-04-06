@@ -147,6 +147,9 @@ module Api
 
     describe '#create' do
       context 'without author and collection' do
+        let(:collection) { create(:collection) }
+        let(:author) { create(:author) }
+
         let(:params) do
           {
             book: {
@@ -154,7 +157,9 @@ module Api
               isbn: '8937192379173',
               description: 'Description',
               price: '30.00',
-              year: '2000'
+              year: '2000',
+              author_id: author.id,
+              collection_id: collection.id
             }
           }
         end
